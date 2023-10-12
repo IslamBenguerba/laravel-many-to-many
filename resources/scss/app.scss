@@ -1,0 +1,45 @@
+@import 'bootstrap';
+@import 'bootstrap-icons';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+
+.container{
+    margin-top: auto;
+}
+.card-body{
+    a{
+        text-decoration: none;
+        color: black;
+        font-size: large;
+    }
+}
+//stile per lo show
+.container-card-show{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.imng-hero-show{
+    width: 50%;
+}
+
+.container-project-show{
+    margin-left: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 2rem;
+}
+.card-titolo-show{
+    display: flex;
+    justify-content: space-between;
+}
+.text-show{
+    margin-right: 50px;
+}
+.container-button-show{
+    display: flex;
+    justify-content: space-between;
+}
