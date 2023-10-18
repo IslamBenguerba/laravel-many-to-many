@@ -49,7 +49,7 @@
                         @foreach ($categories as $categoria)
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="{{ $categoria->id}}"
-                                    id="flexCheckDefault" name="categorie_id[]">
+                                    id="flexCheckDefault" name="categorie_id">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     {{ $categoria->categoria }}
                                 </label>

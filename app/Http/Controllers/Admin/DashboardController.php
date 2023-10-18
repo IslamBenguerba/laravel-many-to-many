@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categorie;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\PorjectRequest;
 use App\Http\Requests\ProjectRequest;
@@ -39,7 +39,7 @@ class DashboardController extends Controller
         }
         public function create()
         {
-            $categories = Categorie::all();
+            $categories = Category::all();
             return view("portfolio.create", ['categories' => $categories]);
         }
     
@@ -53,12 +53,12 @@ class DashboardController extends Controller
             //     // "image" => 'require|image'
             // ]);
             $data["image"] = Storage::put("newProject", $data["image"]);
-            // @dd($data);
             $newProject = new Project();
             
            
             $newProject->fill($data);
-            //  $newProject->categories()->sync($data["categorie_id"]);
+            
+
             $newProject->save();
     
             return redirect()->route('admin.home.index', $newProject);
