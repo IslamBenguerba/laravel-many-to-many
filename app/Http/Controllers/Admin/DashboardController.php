@@ -74,8 +74,9 @@ class DashboardController extends Controller
         public function edit($id)
         {
             $project = Project::findOrFail($id);
+            $categories = Category::all();
 
-            return view("portfolio.edit", ["project" => $project]);
+            return view("portfolio.edit", ["project" => $project,"categories"=> $categories]);
         }
 
         public function update(ProjectRequest $request, $id)
