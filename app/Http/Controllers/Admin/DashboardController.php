@@ -56,9 +56,9 @@ class DashboardController extends Controller
             // @dd($data);
             $newProject = new Project();
             
-            $newProject->categorie()->attach($data["categorie_id"]);
+           
             $newProject->fill($data);
-            
+            //  $newProject->categories()->sync($data["categorie_id"]);
             $newProject->save();
     
             return redirect()->route('admin.home.index', $newProject);

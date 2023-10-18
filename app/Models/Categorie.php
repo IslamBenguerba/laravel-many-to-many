@@ -10,8 +10,8 @@ class Categorie extends Model
 {
     use HasFactory;
 
-    public function projects(){
-        return $this->hasMany(Project::class);
+    public function project(){
+        return $this->belongsToMany(Project::class);
 
     }
 }

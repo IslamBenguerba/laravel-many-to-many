@@ -17,7 +17,7 @@ class Project extends Model
         'categorie_id'
     ];
 
-    public function categorie(){
-        return $this->belongsTo(Categorie::class);
+    public function categories(){
+        return $this->hasOne(Categorie::class, 'categorie_id');
     }
 }
