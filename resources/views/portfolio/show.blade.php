@@ -9,6 +9,9 @@
                 <div>
                     <h2>{{ $project->titolo }}</h2>
                     {{$project->category->categoria}}
+
+
+                    
                 </div>
 
 
