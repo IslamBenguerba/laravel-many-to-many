@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('projects', function (Blueprint $table) {
-            //
-
-            $table->dateTime('update_date')->nullable();
+        Schema::create('projects', function (Blueprint $table) {
+            $table->id();
+            $table->string('titolo');
+            $table->string('descrizione');
+            $table->string('link_git');
+            $table->string('image');
+            $table->timestamps();
         });
     }
 
@@ -23,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('projects', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('projects');
     }
 };

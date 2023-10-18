@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Http\Requests\PorjectRequest;
+use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -37,10 +39,11 @@ class DashboardController extends Controller
         }
         public function create()
         {
-            return view("portfolio.create");
+            $categories = Categorie::all();
+            return view("portfolio.create", ['categories' => $categories]);
         }
     
-        public function store(PorjectRequest $request)
+        public function store(ProjectRequest $request)
         {
             $data = $request->validated();
             // $data = $request->validate([
@@ -50,10 +53,12 @@ class DashboardController extends Controller
             //     // "image" => 'require|image'
             // ]);
             $data["image"] = Storage::put("newProject", $data["image"]);
+            // @dd($data);
             $newProject = new Project();
-    
+            
+            $newProject->categorie()->attach($data["categorie_id"]);
             $newProject->fill($data);
-    
+            
             $newProject->save();
     
             return redirect()->route('admin.home.index', $newProject);
@@ -73,7 +78,7 @@ class DashboardController extends Controller
             return view("portfolio.edit", ["project" => $project]);
         }
 
-        public function update(PorjectRequest $request, $id)
+        public function update(ProjectRequest $request, $id)
         {
             $project = Project::findOrFail($id);
             $data = $request->validated();
