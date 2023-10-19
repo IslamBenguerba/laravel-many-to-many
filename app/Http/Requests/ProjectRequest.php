@@ -27,7 +27,8 @@ class ProjectRequest extends FormRequest
             "descrizione" => "required|string",
             "link_git" => "nullable|string",
             "image" => "nullable|image|max:6000",
-            "categorie_id" => "nullable|exists:categories,id"
+            "categorie_id" => "nullable|exists:categories,id",
+            "techs" => "nullable"
         ];
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PorjectRequest;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
+use App\Models\Technology;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -40,7 +41,8 @@ class DashboardController extends Controller
         public function create()
         {
             $categories = Category::all();
-            return view("portfolio.create", ['categories' => $categories]);
+            $technolist = Technology::all();
+            return view("portfolio.create", ['categories' => $categories,'technologies'=> $technolist]);
         }
     
         public function store(ProjectRequest $request)
@@ -53,11 +55,11 @@ class DashboardController extends Controller
             //     // "image" => 'require|image'
             // ]);
             $data["image"] = Storage::put("newProject", $data["image"]);
+            
             $newProject = new Project();
             
-           
             $newProject->fill($data);
-            
+            // $newProject->technologies()->attach($data["techs"]);
 
             $newProject->save();
     
@@ -66,7 +68,7 @@ class DashboardController extends Controller
     
         public function destroy($id){
             $project = Project::findOrFail($id);
-    
+            $project->technologies()->detach(); 
             $project->delete();
             return redirect()->route("admin.home.index");
         }
@@ -75,8 +77,9 @@ class DashboardController extends Controller
         {
             $project = Project::findOrFail($id);
             $categories = Category::all();
+            $technolist = Technology::all();
 
-            return view("portfolio.edit", ["project" => $project,"categories"=> $categories]);
+            return view("portfolio.edit", ["project" => $project,"categories"=> $categories,"technologies"=> $technolist]);
         }
 
         public function update(ProjectRequest $request, $id)
@@ -85,6 +88,7 @@ class DashboardController extends Controller
             $data = $request->validated();
             
             $data["image"] = Storage::put("newProject", $data["image"]);
+            $project->technologies()->sync($data["techs"]);
             $project->update($data);
     
             return redirect()->route('admin.portfolio.show', $project->id);

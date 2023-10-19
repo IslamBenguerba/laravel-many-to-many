@@ -55,7 +55,18 @@
                                 </label>
                             </div>
                         @endforeach
-
+                    </div>
+                    <div>
+                        Linguaggi
+                        @foreach($technologies as $technology)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{$technology->id}}"
+                                id="flexCheckDefault" name="techs">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                {{ $technology->tecnologia }}
+                            </label>
+                        </div>
+                        @endforeach
                     </div>
                     <div class="text-center">
                         <a class="btn btn-secondary" href="\">annulla</a>

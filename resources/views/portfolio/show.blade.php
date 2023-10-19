@@ -8,9 +8,18 @@
             <div class="card-titolo-show">
                 <div>
                     <h2>{{ $project->titolo }}</h2>
-                    {{$project->category->categoria}}
-
-
+                    {{-- se ha una categoria .... Fammmelo vedere  --}}
+                    @if ($project->category)
+                        {{ $project->category->categoria }}
+                    @endif
+                    {{-- contolla se c'è almeno un valore in technologies --}}
+                    {{-- Ciclo per il numero di relazioni che ha il progetto con la tabella ponte --}}
+                    {{-- $tech  sara l'intera relazione con la tabella technologia e facendo $tech->tecnologia vedremo il valore nella colonna technologia della tabellla technologies --}}
+                    @if ($project->technologies)
+                        @foreach ($project->technologies as $tech)
+                            <span>{{ $tech->tecnologia }}</span>
+                        @endforeach
+                    @endif
                     
                 </div>
 

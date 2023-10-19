@@ -62,7 +62,7 @@
                     </div>
                     @foreach ($categories as $categoria)
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="categorie_id" value="{{$categoria->id }}"
+                            <input class="form-check-input" type="radio" name="categorie_id" value="{{ $categoria->id }}"
                                 id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault1">
                                 {{ $categoria->categoria }}
@@ -72,7 +72,18 @@
                             </label>
                         </div>
                     @endforeach
-
+                    <div>
+                    Linguaggi
+                    @foreach ($technologies as $technology)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ $technology->id }}"
+                                id="flexCheckDefault" name="techs[]">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                {{ $technology->tecnologia }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
                     <div class="d-flex justify-content-between">
                         <a class="btn btn-secondary" href="{{ route('admin.home.index') }}">Annulla</a>
                         <button class="btn btn-primary">Salva</button>
